@@ -4,6 +4,7 @@
 
 USE saas_retention;
 
+
 WITH RECURSIVE months AS (
     SELECT DATE('2024-01-31') AS month_end
 
@@ -25,6 +26,5 @@ LEFT JOIN raw_subscriptions s
        OR TRIM(s.end_date) = ''
        OR STR_TO_DATE(s.end_date, '%Y-%m-%d') > m.month_end
    )
-   AND LOWER(TRIM(s.churn_flag)) = 'false'
 GROUP BY m.month_end
 ORDER BY m.month_end;
