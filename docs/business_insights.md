@@ -79,3 +79,27 @@ Before publishing final churn rates or retention claims:
 ## 9. Conclusion
 
 The data identifies actionable areas for further investigation, particularly feature needs, support experience, affordability, and churn-reason quality. Final business conclusions should follow reconciliation of the account, subscription, and churn-event definitions. Cohort retention should be reported as month-end active retention unless continuous activity is explicitly measured.
+
+## Subscription Churn Validation
+
+### Validation result
+
+A consistency check was performed on all 5,000 records in `raw_subscriptions`, comparing `churn_flag` with the presence of `end_date`.
+
+| Churn flag | End date status | Subscription count |
+|---|---|---:|
+| False | Missing end date | 4,514 |
+| True | End date present | 486 |
+| **Total** | | **5,000** |
+
+### Key findings
+
+- 4,514 subscriptions (90.28%) are marked as not churned and have no end date.
+- 486 subscriptions (9.72%) are marked as churned and have an end date.
+- No mismatched churn-flag and end-date combinations were found in this validation.
+
+### Business interpretation and limitation
+
+The subscription-level churn flag is consistent with the end-date field in the current dataset. However, subscription churn and account churn are different concepts. An account may cancel one subscription while continuing to use other subscriptions.
+
+Therefore, account churn should be defined separately and validated using account-level subscription history and relevant churn events. This check establishes field consistency, not the accuracy of the overall customer-retention definition.
