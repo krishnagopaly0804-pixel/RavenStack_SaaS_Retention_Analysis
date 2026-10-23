@@ -1,128 +1,102 @@
-# RavenStack SaaS Customer Retention Analysis
+# RavenStack SaaS Retention Analysis
 
 ## Project Overview
 
-This project analyzes customer retention, subscription activity, and churn patterns for RavenStack, a synthetic SaaS business.
+This project analyzes SaaS customer retention, subscription churn, churn reasons, feature usage, support-ticket patterns, and cohort activity using SQL and MySQL.
 
-The goal is to understand customer activity over time, identify patterns in churn and reactivation, and develop data-driven recommendations that may help improve customer retention.
-
-The analysis uses SQL as the primary tool, with Python and Power BI planned for deeper analysis and visualization.
+The goal is to identify retention risks, validate churn metrics, and recommend practical actions to improve customer retention.
 
 ## Business Objectives
 
-- Analyze monthly subscription and customer activity.
-- Understand customer retention and churn patterns.
-- Examine churn events and recorded churn reasons.
-- Investigate customer feature usage and support-ticket patterns.
-- Identify potential signals associated with customer churn.
-- Present findings through clear visualizations and business recommendations.
-
-## Dataset Overview
-
-The project dataset contains five tables:
-
-| Table | Description |
-|---|---|
-| `raw_accounts` | Account-level information and churn flags |
-| `raw_subscriptions` | Subscription records, start dates, end dates, and churn flags |
-| `raw_churn_events` | Recorded churn and reactivation events |
-| `raw_feature_usage` | Customer feature-usage activity |
-| `raw_support_tickets` | Customer support interactions |
-
-The current dataset contains 33,100 records across the five tables, based on the initial import counts.
-
-**Data note:** The dataset is synthetic. Account-level churn flags, subscription status, and date-based activity may not always agree. These differences will be investigated and documented before final retention metrics are reported.
+- Define and distinguish account churn, subscription churn, and churn events.
+- Analyze monthly churn-event trends and recorded cancellation reasons.
+- Evaluate month-end active retention by subscription-start cohort.
+- Explore relationships between support-ticket patterns, feature usage, and churn status.
+- Identify data-quality issues that may affect business reporting.
+- Recommend evidence-based customer-retention actions.
 
 ## Tools and Technologies
 
-- **MySQL Workbench:** SQL queries, data validation, joins, and retention analysis.
-- **Python:** Planned data analysis using pandas and visualization libraries.
-- **Visual Studio Code:** Project development and file organization.
-- **Power BI:** Planned interactive dashboard.
-- **GitHub:** Project documentation and version history.
+- **MySQL** — querying and analyzing relational data
+- **MySQL Workbench** — running SQL queries and validating results
+- **GitHub** — version control and project documentation
+- **SQL** — common table expressions, date functions, aggregations, joins, and data-quality checks
 
-## Project Workflow
+## Dataset Overview
 
-### 1. Dataset Understanding and Validation
-- Review the available tables and columns.
-- Verify imported record counts.
-- Check selected missing values, repeated identifiers, and table relationships.
-- Investigate data-quality issues without modifying the raw data unnecessarily.
+The project uses five source tables:
 
-### 2. SQL Analysis
-- Analyze subscription status and end dates.
-- Examine churn-event patterns and recorded reasons.
-- Calculate monthly active subscriptions and active accounts.
-- Validate customer-status definitions across the available tables.
+| Table | Description |
+|---|---|
+| `raw_accounts` | Account information, signup dates, plan tiers, and account churn flags |
+| `raw_subscriptions` | Subscription dates, revenue fields, plan changes, and subscription churn flags |
+| `raw_churn_events` | Recorded churn reasons, churn dates, and reactivation events |
+| `raw_feature_usage` | Feature usage counts, duration, and errors |
+| `raw_support_tickets` | Support priorities, response and resolution times, satisfaction, and escalations |
 
-### 3. Retention and Churn Metrics
-- Define the customer population and reporting periods.
-- Calculate monthly retention and churn metrics using documented rules.
-- Examine reactivation and changes in customer activity.
-- Validate results before interpreting business performance.
+Source data is retained in raw tables for analysis and validation.
 
-### 4. Python Analysis
-- Explore customer behavior and feature-usage patterns.
-- Investigate relationships between support interactions and churn.
-- Create visualizations where useful.
+## Analysis Areas
 
-### 5. Dashboard and Reporting
-- Develop KPI visuals and a dashboard.
-- Summarize the key findings.
-- Prepare practical, evidence-based recommendations.
+1. Raw-data schema inspection and data-quality checks
+2. Subscription churn and account-status validation
+3. Monthly active-account analysis
+4. Monthly churn-event trends
+5. Churn-reason analysis, including December 2024
+6. Support-ticket and feature-usage comparisons
+7. Cohort retention based on first subscription start month
+8. Business insights and retention recommendations
 
-## Key Business Questions
+## Preliminary Findings
 
-1. How does the number of active accounts change over time?
-2. How many subscriptions end each month?
-3. What churn reasons are recorded most frequently?
-4. How do customer activity and reactivation patterns change over time?
-5. Are feature usage or support-ticket patterns associated with churn?
-6. What actions could the business investigate to improve retention?
+- The account table contains 500 accounts, including 110 with `churn_flag = true`.
+- The subscription table contains 486 subscriptions marked as churned.
+- There are 600 churn events, including reactivation events.
+- Among 539 non-reactivation churn events, features, support, and budget are the three most frequently recorded reason categories.
+- December 2024 recorded 106 non-reactivation churn events; budget was the most frequently recorded reason that month.
+- Cohort results show high month-end active retention, but the figures require careful interpretation because accounts can have multiple subscriptions and may reactivate.
+
+These are descriptive findings from the supplied dataset, not proof of causal relationships.
+
+## Metric Definitions and Limitations
+
+- **Account churn:** Based on the account-level churn flag; its business meaning should be documented and reconciled with subscription activity.
+- **Subscription churn:** Based on subscription-level status and end-date information.
+- **Churn events:** Recorded cancellation-related events; event counts can exceed unique-account counts.
+- **Month-end active retention:** Percentage of cohort accounts with at least one subscription active at a reporting month-end.
+
+Month-end activity does not prove continuous activity throughout a month. Churn rates and retention claims should be finalized only after validating metric definitions, reactivation handling, and conflicting status fields.
 
 ## Repository Structure
 
-The repository will be organized as the project progresses.
-
 ```text
-ravenstack-saas-retention-analysis/
+.
 ├── README.md
 ├── docs/
-├── sql/
-├── python/
-├── reports/
-│   ├── charts/
-│   └── dashboard/
-└── requirements.txt
+│   ├── data_dictionary.md
+│   └── business_insights.md
+└── sql/
+    ├── 01_create_database.sql
+    ├── 02_inspect_raw_schemas.sql
+    ├── 03_data_quality_checks.sql
+    ├── 04_subscription_churn_analysis.sql
+    ├── 05_monthly_active_accounts.sql
+    ├── 06_monthly_churn_events.sql
+    ├── 07_churn_reason_analysis.sql
+    ├── 08_support_churn_comparison.sql
+    ├── 09_feature_usage_churn_analysis.sql
+    ├── 10_retention_validation.sql
+    ├── 11_december_churn_reason_analysis.sql
+    └── 12_cohort_retention_analysis.sql
 ```
 
-Files and folders will be added as their corresponding project stages are completed.
+## Recommended Next Steps
 
-## Current Progress
+- Reconcile account, subscription, and churn-event definitions.
+- Validate cohort retention and reactivation behavior.
+- Add a visual dashboard for churn trends and cohort analysis.
+- Track retention KPIs with clearly documented denominators.
 
-- [x] Dataset imported into MySQL Workbench.
-- [x] Initial record-count and selected data-quality checks completed.
-- [x] Subscription status and end-date patterns examined.
-- [x] Initial monthly subscription and account activity analysis performed.
-- [ ] Resolve account-level and subscription-level churn discrepancies.
-- [ ] Finalize monthly retention and churn calculations.
-- [ ] Complete Python analysis and visualizations.
-- [ ] Build the dashboard.
-- [ ] Publish final findings and recommendations.
+## Project Status
 
-## Expected Deliverables
-
-- Documented SQL scripts.
-- Data-quality findings.
-- Monthly customer activity and retention metrics.
-- Python analysis and visualizations.
-- An interactive dashboard, if Power BI is used.
-- Final business insights and recommendations.
-
-## Important Note
-
-Retention and churn metrics will be reported only after the underlying customer-status definitions, reporting periods, and data limitations have been validated. An ended subscription does not necessarily mean that an entire customer account has permanently churned.
-
-## Author
-
-Data Analytics Portfolio Project — RavenStack SaaS Customer Retention Analysis
+SQL analysis and preliminary business-insight documentation are in progress. Findings will be refined as metric validation continues.
