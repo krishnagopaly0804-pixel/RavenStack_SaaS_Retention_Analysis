@@ -1,4 +1,3 @@
-
 -- Project: RavenStack SaaS Customer Retention Analysis
 -- Purpose: Explore subscription churn indicators and churn events.
 -- These queries are read-only and do not modify source data.
