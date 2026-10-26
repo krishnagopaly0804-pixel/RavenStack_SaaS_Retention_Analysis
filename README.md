@@ -80,16 +80,67 @@ Recorded reasons are descriptive customer-feedback categories; they do not estab
 - Raw account churn flags vary across cohorts.
 - A previous month-end activity query reported 100% active accounts across all cohorts. Because every account has at least one subscription marked as non-churned, this result should not be interpreted as confirmed 100% customer retention.
 
-## SQL Analysis Evidence
-
-SQL scripts and their results can be reviewed alongside the project documentation.
-
-Screenshots of MySQL Workbench queries and outputs are stored in the repository's screenshot folder, where available.
-
-If your screenshot folder is named `screenshots`, browse it here:
-
-[View SQL screenshots](screenshots/)
-
 ## Metric Definitions and Limitations
 
-- **Account churn:** The account-level churn flag is available, but its business
+- **Account churn:** The account-level churn flag is available, but its business meaning must be reconciled with subscription history and churn events.
+- **Subscription churn:** The subscription-level churn flag and end-date fields are internally consistent in the final quality audit.
+- **Churn events:** Recorded cancellation-related events. Event counts may exceed the number of unique accounts.
+- **Month-end active status:** Whether an account has at least one subscription satisfying the selected month-end activity rule.
+- **Monthly subscription-ending count:** The number of subscriptions whose recorded end dates fall within a calendar month.
+- **Exploratory monthly churn rate:** Requires validation of the eligible starting population, date-boundary conventions, and treatment of reactivations before being treated as a final business KPI.
+
+Additional limitations:
+
+- Raw source columns were imported as text and require appropriate date and numeric parsing.
+- Account-level and subscription-level counts represent different units of analysis.
+- A subscription ending does not necessarily mean the entire account relationship ended.
+- Recorded churn reasons, support patterns, and feature usage do not independently prove why a customer churned.
+- Newer cohorts have shorter observation periods than older cohorts.
+
+## Business Recommendations
+
+1. **Finalize the account-churn definition:** Agree on how to handle multiple subscriptions, reactivations, and churn events.
+2. **Investigate December subscription endings:** Compare end dates with contract renewals and billing frequency.
+3. **Investigate recorded product and support concerns:** Work with product and customer-success teams to review feature and support-related feedback.
+4. **Improve event coverage:** Investigate ended subscriptions and churned accounts without a matching non-reactivation churn event.
+5. **Publish validated retention KPIs:** Calculate account churn, revenue churn, and cohort retention only after definitions and denominators are confirmed.
+
+## Repository Structure
+
+```text
+RavenStack_SaaS_Retention_Analysis/
+├── README.md
+├── docs/
+│   ├── data_dictionary.md
+│   ├── business_insights.md
+│   └── churn_definition.md
+├── screenshots/
+└── sql/
+    ├── 01_create_database.sql
+    ├── 02_inspect_raw_schemas.sql
+    ├── 03_data_quality_checks.sql
+    ├── 04_subscription_churn_analysis.sql
+    ├── 05_monthly_active_accounts.sql
+    ├── 06_monthly_churn_events.sql
+    ├── 07_churn_reason_analysis.sql
+    ├── 08_support_churn_comparison.sql
+    ├── 09_feature_usage_churn_analysis.sql
+    ├── 10_retention_validation.sql
+    ├── 11_december_churn_reason_analysis.sql
+    ├── 12_cohort_retention_analysis.sql
+    ├── 13_monthly_subscription_churn_rate.sql
+    ├── 14_cohort_churn_flag_analysis.sql
+    ├── 15_churn_event_validation.sql
+    ├── 16_monthly_ended_subscription_analysis.sql
+    ├── 17_december_churn_spike_validation.sql
+    ├── 18_december_daily_ending_analysis.sql
+    └── 19_final_subscription_quality_audit.sql
+```
+
+*Note: The structure above is the intended project layout. Confirm that the filenames and screenshot folder match your actual GitHub repository.*
+
+## Project Status
+
+The project includes SQL-based exploratory analysis, data-quality validation, churn-event analysis, cohort investigation, and business-insight documentation.
+
+Further validation of the account-churn definition and retention metrics is required before presenting them as confirmed business KPIs.
