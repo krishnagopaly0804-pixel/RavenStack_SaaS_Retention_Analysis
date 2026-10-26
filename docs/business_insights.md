@@ -143,3 +143,25 @@ The exploratory monthly subscription churn rates were calculated using subscript
 - A churned subscription does not necessarily mean the account has lost every active subscription.
 - The observed increase in December is descriptive and does not establish why churn increased.
 - The figures should be treated as exploratory until the reporting-date rules and end-date semantics are fully validated.
+## 5. Signup Cohort Churn Flag Analysis
+
+### Objective
+Compare account-level churn flags across monthly signup cohorts to understand how the supplied churn indicator varies by signup month.
+
+### Key Findings
+- The dataset contains 500 accounts across 24 monthly signup cohorts, from January 2023 to December 2024.
+- Overall, 110 accounts are flagged as churned and 390 are flagged as not churned.
+- February 2023 has the highest raw account churn percentage at **38.89%** (7 of 18 accounts).
+- September 2024 has a raw account churn percentage of **36.00%** (9 of 25 accounts).
+- December 2024 has the lowest raw account churn percentage at **5.88%** (1 of 17 accounts).
+
+### Interpretation
+The supplied account-level churn flag varies across signup cohorts. These results provide a descriptive comparison of the raw data.
+
+### Limitations
+- These percentages are calculated from `raw_accounts.churn_flag`; they are not independently validated customer churn or retention rates.
+- Recent signup cohorts have had less time to experience churn than older cohorts, so direct comparisons may be misleading.
+- Earlier validation identified accounts with both ended and open-ended subscriptions. The account churn flag and subscription end dates should therefore not be treated as interchangeable indicators.
+
+### Next Step
+Validate the account-level churn definition against subscription history and churn-event records before presenting cohort retention as a confirmed business metric.
