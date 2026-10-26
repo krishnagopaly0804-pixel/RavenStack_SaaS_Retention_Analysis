@@ -177,3 +177,16 @@ Most accounts with ended subscriptions have a corresponding non-reactivation chu
 
 ### Limitation
 This is an account-level comparison, not a subscription-level reconciliation. Missing event matches do not automatically prove a data error or explain why a subscription ended. Further validation is needed before treating churn-event coverage as complete.
+## 7. Monthly Ended-Subscription Analysis
+
+### Key Findings
+- December 2024 recorded the highest number of ended subscriptions, at **193**.
+- November recorded 73 ended subscriptions, compared with 58 in October.
+- The count increased from 28 in August to 73 in November before rising sharply in December.
+- December recorded 120 more ended subscriptions than November, an increase of approximately **164.4%**.
+
+### Business Interpretation
+The December spike is a priority for further investigation. It may reflect a genuine increase in subscription endings or characteristics of the dataset and its end-date patterns.
+
+### Limitation
+These figures count subscriptions with an end date in each month. They are not unique customer counts or churn rates, and they do not establish why subscriptions ended.
