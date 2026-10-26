@@ -206,3 +206,16 @@ The end dates span the month, but a daily distribution analysis is needed to det
 
 ### Limitation
 This validation describes recorded subscription endings. It does not establish the reason for the increase or confirm that every ended subscription represents customer churn under the final business definition.
+## 9. Daily Subscription Ending Pattern — December 2024
+
+### Key Findings
+- December 31 recorded the highest daily count, with **24 ended subscriptions** across 22 unique accounts.
+- December 29 recorded 19 ended subscriptions, and December 30 recorded 18.
+- The final three days of December accounted for **61 of 193 ended subscriptions (31.61%)**.
+- Subscription endings were recorded across multiple dates during December, with a noticeable concentration near month-end.
+
+### Business Interpretation
+The month-end concentration may be associated with subscription expiry or billing-cycle patterns. This is a hypothesis that requires further investigation.
+
+### Limitation
+End dates alone do not establish why subscriptions ended. The observed pattern should not be presented as proof of a billing-cycle effect or a confirmed increase in customer churn.
