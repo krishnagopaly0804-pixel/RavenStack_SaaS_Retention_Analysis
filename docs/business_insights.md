@@ -190,3 +190,19 @@ The December spike is a priority for further investigation. It may reflect a gen
 
 ### Limitation
 These figures count subscriptions with an end date in each month. They are not unique customer counts or churn rates, and they do not establish why subscriptions ended.
+## 8. December 2024 Subscription Ending Validation
+
+### Results
+- Ended subscription records: **193**
+- Unique subscription IDs: **193**
+- Unique accounts affected: **149**
+- First recorded end date: **December 2, 2024**
+- Last recorded end date: **December 31, 2024**
+
+### Interpretation
+The December spike is not caused by duplicate subscription IDs in this result. The 193 ended subscriptions are associated with 149 distinct accounts, indicating that some accounts had multiple subscriptions end during the month.
+
+The end dates span the month, but a daily distribution analysis is needed to determine whether endings were concentrated on particular dates.
+
+### Limitation
+This validation describes recorded subscription endings. It does not establish the reason for the increase or confirm that every ended subscription represents customer churn under the final business definition.
