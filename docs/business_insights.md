@@ -103,3 +103,43 @@ A consistency check was performed on all 5,000 records in `raw_subscriptions`, c
 The subscription-level churn flag is consistent with the end-date field in the current dataset. However, subscription churn and account churn are different concepts. An account may cancel one subscription while continuing to use other subscriptions.
 
 Therefore, account churn should be defined separately and validated using account-level subscription history and relevant churn events. This check establishes field consistency, not the accuracy of the overall customer-retention definition.
+
+## Monthly Subscription Churn Analysis (2024)
+
+### Key Results
+
+The monthly subscription churn analysis identified 486 churned subscriptions across the dataset. Of these, 468 ended during 2024.
+
+The exploratory monthly subscription churn rates were calculated using subscriptions active at the start of each month as the denominator.
+
+| Month | Churned subscriptions | Active at start | Churn rate |
+|---|---:|---:|---:|
+| Jan 2024 | 11 | 648 | 1.70% |
+| Feb 2024 | 7 | 771 | 0.91% |
+| Mar 2024 | 9 | 916 | 0.98% |
+| Apr 2024 | 12 | 1,093 | 1.10% |
+| May 2024 | 12 | 1,274 | 0.94% |
+| Jun 2024 | 13 | 1,507 | 0.86% |
+| Jul 2024 | 17 | 1,742 | 0.98% |
+| Aug 2024 | 28 | 2,055 | 1.36% |
+| Sep 2024 | 35 | 2,364 | 1.48% |
+| Oct 2024 | 58 | 2,769 | 2.09% |
+| Nov 2024 | 73 | 3,215 | 2.27% |
+| Dec 2024 | 193 | 3,754 | 5.14% |
+
+### Business Observations
+
+- December 2024 had the highest observed monthly subscription churn rate at 5.14%.
+- June 2024 had the lowest observed rate at 0.86%.
+- The rate increased from 2.09% in October to 2.27% in November and 5.14% in December.
+- December recorded 193 subscription endings across 149 unique accounts.
+- The December concentration should be investigated further before attributing it to a business cause.
+
+### Definitions and Limitations
+
+- These are subscription-level metrics, not account-level churn rates.
+- The monthly rate uses subscriptions active at the start of the month as its denominator and subscriptions ending during the month as its numerator.
+- The account-level churn flag does not align perfectly with subscription history or churn-event history.
+- A churned subscription does not necessarily mean the account has lost every active subscription.
+- The observed increase in December is descriptive and does not establish why churn increased.
+- The figures should be treated as exploratory until the reporting-date rules and end-date semantics are fully validated.
