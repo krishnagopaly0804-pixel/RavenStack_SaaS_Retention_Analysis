@@ -235,3 +235,58 @@ The subscription churn flag and end-date fields are internally consistent in the
 
 ### Limitation
 This result validates the relationship between two subscription-level fields only. It does not independently validate the account-level churn definition or establish that all account-level retention metrics are reliable.
+## Final Business Insights and Recommendations
+
+### 1. Project Overview
+
+The RavenStack SaaS Retention Analysis project examines account churn flags, subscription history, churn events, customer-reported churn reasons, support tickets, feature usage, and signup cohorts using SQL and MySQL Workbench.
+
+The goal is to understand the available churn signals, identify data-quality limitations, and recommend areas for further investigation.
+
+### 2. Key Findings
+
+**Account churn flags**
+- The dataset contains 500 accounts.
+- 110 accounts have `churn_flag = true`, representing 22% of accounts.
+- This is the percentage of accounts marked as churned in the raw data, not a fully validated account-churn rate.
+
+**Subscription history**
+- There are 5,000 subscription records and 5,000 distinct subscription IDs.
+- 486 subscriptions are flagged as churned and have an end date.
+- 4,514 subscriptions are not flagged as churned and have no end date.
+- All 500 accounts have at least one subscription with a non-churned flag. Therefore, the raw subscription history does not independently establish account-level churn.
+
+**Churn reasons**
+- Across 539 non-reactivation churn events, features and support are the two most frequently recorded reason categories.
+- These reason codes describe recorded customer feedback; they do not prove the underlying cause of churn.
+
+**December 2024**
+- December contains 106 non-reactivation churn events across 87 unique accounts.
+- There are 193 subscriptions with an end date in December, across 149 unique accounts.
+- The concentration of subscription endings near month-end warrants investigation. The available data does not establish whether billing cycles, contract expirations, or another factor caused this pattern.
+
+**Signup cohorts**
+- The dataset contains 500 accounts across 24 monthly signup cohorts.
+- Raw account churn flags vary by cohort.
+- A previous month-end cohort query reported 100% active accounts in every cohort. Because every account has at least one subscription with a non-churned flag, this result should not be presented as proof of 100% customer retention.
+
+### 3. Recommended Business Actions
+
+1. **Validate churn definitions:** Agree on whether account churn means the end of all eligible subscriptions, a recorded non-reactivation churn event, or another business-defined condition.
+2. **Investigate December endings:** Check contract terms, billing frequency, renewal dates, and whether end dates represent the last active day or the first inactive day.
+3. **Investigate product experience:** Review the features and support reason categories with product and customer-success teams.
+4. **Improve churn-event coverage:** Investigate ended subscriptions or churned accounts without a matching non-reactivation churn event.
+5. **Build validated retention metrics:** After confirming the churn definition and observation windows, calculate account churn, revenue churn, and cohort retention using consistent denominators.
+
+### 4. Data and Methodology Limitations
+
+- Raw columns were imported as text, so dates and numeric values require appropriate parsing and validation.
+- Account-level and subscription-level counts are different measures and should not be treated as interchangeable.
+- Churn reason codes are descriptive, not proof of causation.
+- Monthly subscription-ending counts are not churn rates.
+- Monthly churn-rate calculations remain exploratory until date-boundary conventions and eligible starting populations are confirmed.
+- The current cohort results should not be used to claim 100% retention without further validation.
+
+### 5. Conclusion
+
+The project identifies useful churn signals and important data-quality limitations in the RavenStack dataset. The next priority is to establish a defensible account-churn definition, validate subscription and event relationships, and then publish business metrics that can be interpreted reliably.
