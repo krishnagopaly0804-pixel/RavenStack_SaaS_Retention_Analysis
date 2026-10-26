@@ -219,3 +219,19 @@ The month-end concentration may be associated with subscription expiry or billin
 
 ### Limitation
 End dates alone do not establish why subscriptions ended. The observed pattern should not be presented as proof of a billing-cycle effect or a confirmed increase in customer churn.
+## 10. Final Subscription Data Quality Audit
+
+### Validation Results
+- Total subscription rows: **5,000**
+- Unique subscription IDs: **5,000**
+- Unique accounts represented: **500**
+- Subscriptions flagged as churned: **486**
+- Subscriptions flagged as not churned: **4,514**
+- Churned subscriptions missing an end date: **0**
+- Not-churned subscriptions with an end date: **0**
+
+### Conclusion
+The subscription churn flag and end-date fields are internally consistent in the raw subscription table. No mismatches were found in this validation.
+
+### Limitation
+This result validates the relationship between two subscription-level fields only. It does not independently validate the account-level churn definition or establish that all account-level retention metrics are reliable.
