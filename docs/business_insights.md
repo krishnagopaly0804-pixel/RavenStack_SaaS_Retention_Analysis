@@ -165,3 +165,15 @@ The supplied account-level churn flag varies across signup cohorts. These result
 
 ### Next Step
 Validate the account-level churn definition against subscription history and churn-event records before presenting cohort retention as a confirmed business metric.
+## 6. Churn Event Coverage Validation
+
+### Results
+- Accounts with at least one ended subscription: **312**
+- Accounts with an ended subscription and a non-reactivation churn event: **220 (70.51%)**
+- Accounts with an ended subscription but no matching non-reactivation churn event: **92 (29.49%)**
+
+### Interpretation
+Most accounts with ended subscriptions have a corresponding non-reactivation churn event at the account level. However, 92 accounts have no matching event in the filtered event records.
+
+### Limitation
+This is an account-level comparison, not a subscription-level reconciliation. Missing event matches do not automatically prove a data error or explain why a subscription ended. Further validation is needed before treating churn-event coverage as complete.
