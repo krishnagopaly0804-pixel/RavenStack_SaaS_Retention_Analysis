@@ -1,5 +1,4 @@
-
--- Step 43: Summarize account churn flags by signup cohort.
+-- Summarize account churn flags by signup cohort.
 -- This compares the supplied account-level flag with cohort size.
 -- It does not assume that the raw flag is a validated churn definition.
 
