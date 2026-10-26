@@ -1,4 +1,4 @@
--- Step 36: Calculate monthly subscription churn rates for 2024.
+-- Calculate monthly subscription churn rates for 2024.
 -- Denominator: subscriptions active at the start of each month.
 -- Numerator: subscriptions ending during that month.
 -- This is a subscription churn rate, not an account churn rate.
