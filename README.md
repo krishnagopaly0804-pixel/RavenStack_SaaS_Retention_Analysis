@@ -2,25 +2,30 @@
 
 ## Project Overview
 
-This project investigates customer retention, subscription churn, churn events, recorded cancellation reasons, feature usage, support-ticket patterns, and signup cohorts using SQL and MySQL Workbench.
+This project investigates customer retention, subscription churn, churn events, recorded cancellation reasons, feature usage, support-ticket patterns, and signup cohorts using SQL, MySQL Workbench, Python, and Jupyter Notebook.
 
-The objective is to evaluate available churn signals, identify data-quality limitations, and develop practical recommendations for improving customer retention.
+The objective is to evaluate available churn signals, identify data-quality limitations, analyze customer retention patterns, and develop practical recommendations for improving customer retention.
 
 ## Business Objectives
 
 - Distinguish account churn, subscription churn, and churn events.
 - Analyze monthly churn-event trends and recorded cancellation reasons.
 - Examine month-end subscription activity by signup cohort.
+- Analyze customer retention across monthly signup cohorts.
 - Explore support-ticket and feature-usage patterns across churn statuses.
 - Validate subscription records, date relationships, and conflicting status fields.
 - Recommend evidence-based customer-retention actions.
 
 ## Tools and Technologies
 
-- **MySQL:** Relational data analysis and querying
-- **MySQL Workbench:** SQL execution and result validation
-- **SQL:** Joins, aggregations, common table expressions, date functions, and data-quality checks
-- **GitHub:** Source control, documentation, and project evidence
+- **MySQL:** Relational data analysis and querying.
+- **MySQL Workbench:** SQL execution and result validation.
+- **SQL:** Joins, aggregations, common table expressions, date functions, and data-quality checks.
+- **Python:** Data analysis and visualization.
+- **Pandas:** Data manipulation and cohort analysis.
+- **Matplotlib and Seaborn:** Retention heatmap visualization.
+- **Jupyter Notebook:** Interactive analysis and documentation.
+- **GitHub:** Source control, documentation, and project deliverables.
 
 ## Dataset Overview
 
@@ -38,27 +43,30 @@ The original data is retained in raw tables to support investigation and validat
 
 ## Analysis Areas
 
-1. Raw schema inspection and data-quality checks
-2. Subscription churn and account-status validation
-3. Monthly active subscription and account analysis
-4. Monthly churn-event trends
-5. Churn-reason analysis, including December 2024
-6. Support-ticket and feature-usage comparisons
-7. Signup-cohort and month-end activity analysis
-8. Monthly subscription-ending and exploratory churn-rate analysis
-9. Subscription quality audits and churn-event validation
-10. Business insights and retention recommendations
+1. Raw schema inspection and data-quality checks.
+2. Subscription churn and account-status validation.
+3. Monthly active subscription and account analysis.
+4. Monthly churn-event trends.
+5. Churn-reason analysis, including December 2024.
+6. Support-ticket and feature-usage comparisons.
+7. Signup-cohort and month-end activity analysis.
+8. Monthly subscription-ending and exploratory churn-rate analysis.
+9. Subscription quality audits and churn-event validation.
+10. Cohort retention analysis and visualization.
+11. Business insights and retention recommendations.
 
 ## Cohort Retention Analysis
 
 The cohort analysis examines customer retention across 24 monthly signup cohorts, covering 500 accounts from January 2023 to December 2024.
 
 ### Methodology
+
 - Cohorts are grouped by the account signup month.
 - Retention is measured monthly from the signup month.
 - An account is considered retained if it has no recorded non-reactivation churn event by the reporting month-end.
 - Reactivation events do not reverse a previously recorded churn event.
 - Month 0 represents retention at the end of the signup month.
+- Month 12 retention is evaluated only for cohorts with complete Month 12 observations.
 
 ### Key Cohort Findings
 
@@ -71,10 +79,14 @@ The cohort analysis examines customer retention across 24 monthly signup cohorts
 | Accounts in mature cohorts | 227 |
 | Retained accounts at Month 12 | 100 |
 
-Month 12 retention is calculated only across the 12 cohorts with complete Month 12 observations.
+Month 0 retention represents 453 retained accounts out of 500 accounts.
+
+Month 12 retention represents 100 retained accounts out of 227 accounts across the 12 mature cohorts.
 
 ### Validation
-The following checks passed:
+
+The following technical validation checks passed:
+
 - Retained accounts do not exceed cohort size.
 - Retention percentages match the underlying account counts.
 - Cohort sizes remain consistent across reporting months.
@@ -82,18 +94,21 @@ The following checks passed:
 
 ### Cohort Analysis Deliverables
 
-- [Cohort Analysis Notebook](03_cohorts.ipynb)
-- [Cohort Retention CSV](cohort_retention_output.csv)
-- [Customer Retention Heatmap](cohort_retention_heatmap.png)
+- **Notebook:** `notebooks/03_cohorts.ipynb`
+- **Cohort Retention Data:** `notebooks/cohort_retention_output.csv`
+- **Retention Heatmap:** `outputs/cohort_retention_heatmap.png`
 
 ### Business Interpretation
-Retention generally declines as accounts age, although the rate of decline varies across cohorts. Older cohorts provide more observation months than newer cohorts.
 
-Cohorts with sharper retention declines should be investigated alongside churn reasons, subscription activity, and feature usage.
+Retention generally declines as accounts age, although the rate of decline varies across cohorts.
+
+The 2023 signup cohorts provide up to 12 months of observation data, while newer 2024 cohorts have shorter observation periods.
+
+Cohorts with sharper retention declines should be investigated alongside churn reasons, subscription activity, and customer feature usage.
 
 ## Key Findings
 
-### Account and subscription data
+### Account and Subscription Data
 
 - The dataset contains **500 accounts**.
 - **110 accounts (22%)** have `churn_flag = true` in the raw account table. This is a raw-flag percentage, not a validated account-churn rate.
@@ -101,7 +116,7 @@ Cohorts with sharper retention declines should be investigated alongside churn r
 - **486 subscriptions** are marked as churned, while **4,514** are marked as non-churned.
 - The final subscription quality audit found that all 486 churn-flagged subscriptions have end dates and all 4,514 non-churn-flagged subscriptions have blank end dates.
 
-### Churn events and recorded reasons
+### Churn Events and Recorded Reasons
 
 - The dataset contains **600 churn events**, including reactivation events.
 - There are **539 non-reactivation churn events**.
@@ -110,13 +125,13 @@ Cohorts with sharper retention declines should be investigated alongside churn r
 
 Recorded reasons are descriptive customer-feedback categories; they do not establish causation.
 
-### Subscription endings
+### Subscription Endings
 
 - There are **486 subscriptions with recorded end dates**.
 - **193 subscriptions across 149 unique accounts** ended in December 2024.
 - The concentration of subscription endings in December warrants investigation. Billing cycles, renewal dates, and end-date conventions should be checked before drawing conclusions about the cause.
 
-### Cohort analysis
+### Cohort Analysis
 
 - The dataset contains **500 accounts across 24 monthly signup cohorts**.
 - Raw account churn flags vary across cohorts.
@@ -131,7 +146,7 @@ Recorded reasons are descriptive customer-feedback categories; they do not estab
 - **Monthly subscription-ending count:** The number of subscriptions whose recorded end dates fall within a calendar month.
 - **Exploratory monthly churn rate:** Requires validation of the eligible starting population, date-boundary conventions, and treatment of reactivations before being treated as a final business KPI.
 
-Additional limitations:
+### Additional Limitations
 
 - Raw source columns were imported as text and require appropriate date and numeric parsing.
 - Account-level and subscription-level counts represent different units of analysis.
@@ -151,12 +166,21 @@ Additional limitations:
 
 ```text
 RavenStack_SaaS_Retention_Analysis/
+│
 ├── README.md
+│
 ├── docs/
 │   ├── data_dictionary.md
 │   ├── business_insights.md
 │   └── churn_definition.md
-├── screenshots/
+│
+├── notebooks/
+│   ├── 03_cohorts.ipynb
+│   └── cohort_retention_output.csv
+│
+├── outputs/
+│   └── cohort_retention_heatmap.png
+│
 └── sql/
     ├── 01_create_database.sql
     ├── 02_inspect_raw_schemas.sql
@@ -176,13 +200,22 @@ RavenStack_SaaS_Retention_Analysis/
     ├── 16_monthly_ended_subscription_analysis.sql
     ├── 17_december_churn_spike_validation.sql
     ├── 18_december_daily_ending_analysis.sql
-    └── 19_final_subscription_quality_audit.sql
+    ├── 19_final_subscription_quality_audit.sql
+    └── 21_event_based_cohort_retention.sql
 ```
 
-*Note: The structure above is the intended project layout. Confirm that the filenames and screenshot folder match your actual GitHub repository.*
+*Note: This represents the intended project structure. Keep only filenames that actually exist in your GitHub repository.*
 
 ## Project Status
 
-The project includes SQL-based exploratory analysis, data-quality validation, churn-event analysis, cohort investigation, and business-insight documentation.
+The project includes SQL-based exploratory analysis, data-quality validation, churn-event analysis, cohort investigation, Python-based retention visualization, and business-insight documentation.
 
 Further validation of the account-churn definition and retention metrics is required before presenting them as confirmed business KPIs.
+
+## Conclusion
+
+This project demonstrates an end-to-end exploratory SaaS retention analysis workflow using SQL, MySQL Workbench, Python, and Jupyter Notebook.
+
+The analysis establishes a cohort retention baseline, identifies subscription and churn-event patterns, highlights data-quality limitations, and provides actionable areas for further investigation.
+
+The findings can help RavenStack prioritize customer-retention improvements and develop more reliable business KPIs.
