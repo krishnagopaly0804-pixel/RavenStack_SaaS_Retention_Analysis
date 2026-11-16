@@ -201,6 +201,7 @@ RavenStack_SaaS_Retention_Analysis/
     ├── 17_december_churn_spike_validation.sql
     ├── 18_december_daily_ending_analysis.sql
     ├── 19_final_subscription_quality_audit.sql
+    ├── 20_monthly_customer_churn_rate.sql
     └── 21_event_based_cohort_retention.sql
 ```
 
