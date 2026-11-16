@@ -1,6 +1,3 @@
--- ============================================================
--- Project: RavenStack SaaS Retention Analysis
--- File: 20_monthly_customer_churn_rate.sql
 -- Purpose:
 -- Calculate monthly customer churn and reactivation metrics.
 --
