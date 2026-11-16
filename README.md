@@ -49,6 +49,48 @@ The original data is retained in raw tables to support investigation and validat
 9. Subscription quality audits and churn-event validation
 10. Business insights and retention recommendations
 
+## Cohort Retention Analysis
+
+The cohort analysis examines customer retention across 24 monthly signup cohorts, covering 500 accounts from January 2023 to December 2024.
+
+### Methodology
+- Cohorts are grouped by the account signup month.
+- Retention is measured monthly from the signup month.
+- An account is considered retained if it has no recorded non-reactivation churn event by the reporting month-end.
+- Reactivation events do not reverse a previously recorded churn event.
+- Month 0 represents retention at the end of the signup month.
+
+### Key Cohort Findings
+
+| Metric | Result |
+|---|---:|
+| Total accounts | 500 |
+| Signup cohorts | 24 |
+| Month 0 weighted retention | 90.60% |
+| Month 12 weighted retention | 44.05% |
+| Accounts in mature cohorts | 227 |
+| Retained accounts at Month 12 | 100 |
+
+Month 12 retention is calculated only across the 12 cohorts with complete Month 12 observations.
+
+### Validation
+The following checks passed:
+- Retained accounts do not exceed cohort size.
+- Retention percentages match the underlying account counts.
+- Cohort sizes remain consistent across reporting months.
+- Retained account counts do not increase with cohort age.
+
+### Cohort Analysis Deliverables
+
+- [Cohort Analysis Notebook](03_cohorts.ipynb)
+- [Cohort Retention CSV](cohort_retention_output.csv)
+- [Customer Retention Heatmap](cohort_retention_heatmap.png)
+
+### Business Interpretation
+Retention generally declines as accounts age, although the rate of decline varies across cohorts. Older cohorts provide more observation months than newer cohorts.
+
+Cohorts with sharper retention declines should be investigated alongside churn reasons, subscription activity, and feature usage.
+
 ## Key Findings
 
 ### Account and subscription data
