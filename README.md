@@ -58,6 +58,15 @@ The original data is retained in raw tables to support investigation and validat
 ## Cohort Retention Analysis
 
 The cohort analysis examines customer retention across 24 monthly signup cohorts, covering 500 accounts from January 2023 to December 2024.
+### Cohort Analysis Deliverables
+
+| Deliverable | File |
+|---|---|
+| Cohort Analysis Notebook | [03_cohorts.ipynb](notebooks/03_cohorts.ipynb) |
+| Cohort Retention Dataset | [cohort_retention_output.csv](notebooks/cohort_retention_output.csv) |
+| Cohort Retention Heatmap | [cohort_retention_heatmap.png](outputs/cohort_retention_heatmap.png) |
+
+The notebook includes cohort preparation, retention calculations, validation checks, visualization, and business insights.
 
 ### Methodology
 
